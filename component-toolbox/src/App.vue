@@ -8,6 +8,17 @@
   </v-app>
 </template>
 
+<script>
+  import {Component, Vue} from "vue-property-decorator";
+
+  @Component()
+  export default class App extends Vue {
+    mounted() {
+      console.log(this.$vuetify.breakpoint.name)
+    }
+  }
+</script>
+
 <style lang="scss">
   #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;

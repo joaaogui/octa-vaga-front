@@ -1,15 +1,16 @@
 <template>
   <v-row no-gutters class="fill-height">
-    <v-col class="ComponentDrawer pa-8" cols="4">
-      <h2 class="display-1 font-weight-light mb-10 ">Component Toolbox</h2>
+    <v-col class="ComponentDrawer pa-8" cols="12" xs="12" sm="5" md="4" lg="3">
+      <h2 class="display-1 font-weight-light mb-5 ">Component Toolbox</h2>
+      <h4 class="subtitle-1 font-weight-light mb-10 ">Drag and drop the components below into the dashed workarea</h4>
       <drag id="drag" v-for="component in baseComponents" :key="component.type" :data="component" class="mb-6 mt-6">
-        <TextField v-if="component.type === 'TextField'"/>
         <v-divider class="mb-6"></v-divider>
+        <TextField v-if="component.type === 'TextField'"/>
         <CheckBox v-if="component.type === 'CheckBox'"/>
         <Button v-if="component.type === 'Button'"/>
       </drag>
     </v-col>
-    <v-col cols="8" class="pa-5">
+    <v-col cols="12" xs="12" class="pa-1 dropArea" sm="7" md="8" lg="9">
       <drop @drop="onDrop" style="height:100%">
         <grid-layout
           :layout.sync="activeComponents"
@@ -69,8 +70,8 @@
     export default class ComponentToolbox extends Vue {
         baseComponents = [
             {type: "TextField", w: 5, h: 1.45},
-            {type: "CheckBox", w: 3, h: 1.85},
-            {type: "Button", w: 2, h: 1}
+            {type: "CheckBox", w: 5, h: 1.85},
+            {type: "Button", w: 3.3, h: 1}
         ]
 
         get activeComponents() {
@@ -94,6 +95,12 @@
 </script>
 
 <style scoped>
+  .dropArea {
+    min-height: 50vh;
+    max-width: 100%;
+    border: 2px gray dotted;
+    border-radius: 10px;
+  }
 
   .redBorder {
     border: 1px solid red;
