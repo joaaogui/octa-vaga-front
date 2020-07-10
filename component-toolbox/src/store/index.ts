@@ -4,23 +4,22 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-      componentList: Array()
-  },
-  mutations: {
-      addComponent(state, component) {
-          state.componentList.push(component);
-      },
-      removeComponent(state, index) {
-          state.componentList.splice(index, 1)
-      },
-      editComponent(state, {element, index}) {
-          let existingComponent = state.componentList[index]
-          existingComponent = element
-      }
-  },
-  actions: {
-  },
-  modules: {
-  }
+    state: {
+        activeComponents: Array(),
+    },
+    mutations: {
+        addComponent(state, component) {
+            component.i = state.activeComponents.length > 0 ? state.activeComponents.slice(-1)[0].i + 1: 0;
+            state.activeComponents.push(component);
+        },
+        removeComponent(state, id) {
+            state.activeComponents = state.activeComponents.filter(item => item.i !== id)
+        },
+        editComponent(state, {element, index}) {
+            let existingComponent = state.activeComponents[index]
+            existingComponent = element
+        }
+    },
+    actions: {},
+    modules: {}
 })

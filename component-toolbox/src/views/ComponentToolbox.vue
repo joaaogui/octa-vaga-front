@@ -1,5 +1,5 @@
 <template>
-  <v-row  no-gutters class="fill-height">
+  <v-row no-gutters class="fill-height">
     <v-col class="ComponentDrawer pa-8" cols="4">
       <h2 class="display-1 font-weight-light mb-10 ">Component Toolbox</h2>
       <drag id="drag" v-for="component in baseComponents" :key="component.type" :data="component" class="mb-6 mt-6">
@@ -9,21 +9,37 @@
         <Button v-if="component.type === 'Button'"/>
       </drag>
     </v-col>
-    <v-col  cols="8" class="pa-5">
-      <drop @drop="onDrop" style="height:100%" class="my-list">
-        <vue-draggable-resizable
-          id="drop"
-          :grid=[20,20]
-          :parent="true"
-          class="list-group-item"
-          v-for="(element, index) in ComponentList"
-          :key="index"
+    <v-col cols="8" class="pa-5">
+      <drop @drop="onDrop" style="height:100%">
+        <grid-layout
+          :layout.sync="activeComponents"
+          :col-num="12"
+          :row-height="60"
+          :is-draggable="true"
+          :is-resizable="true"
+          :is-mirrored="false"
+          :margin="[2,2]"
+          :use-css-transforms="true"
         >
-          <v-btn @click="removeComponent(index)" text small> x</v-btn>
-          <TextField v-if="element.type === 'TextField'"/>
-          <CheckBox v-if="element.type === 'CheckBox'"/>
-          <Button v-if="element.type === 'Button'"/>
-        </vue-draggable-resizable>
+          <grid-item id="drop"
+                     v-for="item in activeComponents"
+                     :x="item.x"
+                     :y="item.y"
+                     :w="item.w"
+                     :h="item.h"
+                     :i="item.i"
+                     :key="item.i">
+            <TextField v-if="item.type === 'TextField'">
+              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+            </TextField>
+            <CheckBox v-if="item.type === 'CheckBox'">
+              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+            </CheckBox>
+            <Button v-if="item.type === 'Button'">
+              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+            </Button>
+          </grid-item>
+        </grid-layout>
       </drop>
     </v-col>
   </v-row>
@@ -35,6 +51,9 @@
     import CheckBox from "@/components/CheckBox.vue";
     import Button from "@/components/Button.vue";
     import {Drag, Drop} from "vue-easy-dnd";
+    // @ts-ignore
+    import VueGridLayout from 'vue-grid-layout';
+
 
     @Component({
         components: {
@@ -42,29 +61,34 @@
             CheckBox,
             Button,
             Drag,
-            Drop
+            Drop,
+            GridLayout: VueGridLayout.GridLayout,
+            GridItem: VueGridLayout.GridItem
         }
     })
     export default class ComponentToolbox extends Vue {
         baseComponents = [
-            {type: "TextField", id: 1, label: "Label"},
-            {type: "CheckBox", id: 2, itens: 3},
-            {type: "Button", id: 3, label: "Button"}
+            {type: "TextField", w: 5, h: 1.45},
+            {type: "CheckBox", w: 3, h: 1.85},
+            {type: "Button", w: 2, h: 1}
         ]
 
-
-
-        get ComponentList() {
-            const components = this.$store.state.componentList;
-            return components;
+        get activeComponents() {
+            return this.$store.state.activeComponents;
         }
 
         onDrop(event: any) {
-            this.$store.commit("addComponent", event.data)
+            const component: { [k: string]: any } = {};
+            component.h = event.data.h
+            component.w = event.data.w
+            component.type = event.data.type
+            component.x = 1
+            component.y = 7
+            this.$store.commit("addComponent", component)
         }
 
-        removeComponent(index: any) {
-            this.$store.commit("removeComponent", index)
+        removeComponent(id: number) {
+            this.$store.commit("removeComponent", id)
         }
     }
 </script>
@@ -73,6 +97,10 @@
 
   .redBorder {
     border: 1px solid red;
+  }
+
+  .greenBorder {
+    border: 1px solid green;
   }
 
   .ComponentDrawer {
