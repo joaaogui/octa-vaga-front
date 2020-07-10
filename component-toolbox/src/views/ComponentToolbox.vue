@@ -1,7 +1,8 @@
 <template>
-  <v-row class="redBorder fill-height">
-    <v-col class="redBorder" cols="4">
-      <drag v-for="element in list1" :key="element.type" :data="element">
+  <v-row no-gutters class="fill-height">
+    <v-col class="ComponentDrawer pa-5" cols="4">
+      <h1>Toolbox</h1>
+      <drag v-for="element in list1" :key="element.type" :data="element" class="mt-4">
         <TextField v-if="element.type === 'TextField'"/>
         <CheckBox v-if="element.type === 'CheckBox'"/>
         <Button v-if="element.type === 'Button'"/>
@@ -13,7 +14,7 @@
           style="text-align: right"
           :grid=[20,20]
           :parent="true"
-          class="list-group-item redBorder"
+          class="list-group-item"
           v-for="(element, index) in lists"
           :key="index"
         >
@@ -29,7 +30,6 @@
 
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator';
-    import draggable from "vuedraggable";
     import TextField from "@/components/TextField.vue";
     import CheckBox from "@/components/CheckBox.vue";
     import Button from "@/components/Button.vue";
@@ -37,7 +37,6 @@
 
     @Component({
         components: {
-            draggable,
             TextField,
             CheckBox,
             Button,
@@ -69,5 +68,9 @@
 
   .redBorder {
     border: 1px solid red;
+  }
+
+  .ComponentDrawer {
+    background: grey;
   }
 </style>
