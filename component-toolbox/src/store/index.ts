@@ -13,6 +13,10 @@ export default new Vuex.Store({
       },
       removeComponent(state, index) {
           state.componentList.splice(index, 1)
+      },
+      editComponent(state, {element, index}) {
+          let existingComponent = state.componentList[index]
+          existingComponent = element
       }
   },
   actions: {
