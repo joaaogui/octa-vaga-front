@@ -31,13 +31,31 @@
                      :i="item.i"
                      :key="item.i">
             <TextField v-if="item.type === 'TextField'">
-              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+              <v-tooltip left>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-bind="attrs"
+                          v-on="on" small @click="removeComponent(item.i)">mdi-delete</v-icon>
+                </template>
+                <span>Delete</span>
+              </v-tooltip>
             </TextField>
             <CheckBox v-if="item.type === 'CheckBox'">
-              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+              <v-tooltip left>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-bind="attrs"
+                          v-on="on" small @click="removeComponent(item.i)">mdi-delete</v-icon>
+                </template>
+                <span>Delete</span>
+              </v-tooltip>
             </CheckBox>
             <Button v-if="item.type === 'Button'">
-              <v-icon small @click="removeComponent(item.i)">mdi-delete</v-icon>
+              <v-tooltip left>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon v-bind="attrs"
+                          v-on="on" small @click="removeComponent(item.i)">mdi-delete</v-icon>
+                </template>
+                <span>Delete</span>
+              </v-tooltip>
             </Button>
           </grid-item>
         </grid-layout>

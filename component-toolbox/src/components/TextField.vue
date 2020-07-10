@@ -2,12 +2,36 @@
   <div class="pr-1 pl-1 pb-2" :class="showEdit ? 'activeComponent' : ''">
     <div style="text-align: right">
       <slot></slot>
-      <v-icon small v-if="showEdit" @click.stop="dialog = true">mdi-pencil</v-icon>
+      <v-tooltip v-if="showEdit" right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon v-bind="attrs"
+                  v-on="on" small @click.stop="dialog = true">mdi-pencil</v-icon>
+        </template>
+        <span>Edit</span>
+      </v-tooltip>
     </div>
-    <v-text-field outlined value=" " style="cursor: pointer"
+
+    <v-text-field outlined :value="placeholder" style="cursor: pointer"
                   disabled
                   hide-details="auto"
-                  label="input text"></v-text-field>
+                  :label="label"></v-text-field>
+    <v-dialog
+      v-model="dialog"
+      max-width="290"
+    >
+      <v-card class="pa-5">
+        <v-text-field v-model="label" outlined
+                      @keyup.enter="dialog = false"
+                      hide-details="auto"
+                      label="Digite a label do text field"></v-text-field>
+      </v-card>
+      <v-card class="pa-5">
+        <v-text-field v-model="placeholder" outlined
+                      @keyup.enter="dialog = false"
+                      hide-details="auto"
+                      label="Digite o texto do placeholder"></v-text-field>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -17,6 +41,9 @@
     @Component
     export default class TextField extends Vue {
         showEdit = false
+        dialog = false
+        label = 'input text'
+        placeholder = 'placeholder'
 
         mounted() {
             if (this.$parent.$el) {

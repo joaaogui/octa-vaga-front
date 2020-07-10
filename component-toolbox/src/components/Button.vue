@@ -3,15 +3,23 @@
     <div class="mb-1" v-if="!showEdit">button</div>
     <div style="text-align: right">
       <slot></slot>
-      <v-icon small v-if="showEdit" @click.stop="dialog = true">mdi-pencil</v-icon>
+      <v-tooltip v-if="showEdit" right>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon v-bind="attrs"
+                  v-on="on" small @click.stop="dialog = true">mdi-pencil</v-icon>
+        </template>
+        <span>Edit</span>
+      </v-tooltip>
     </div>
-    <v-btn small dark color="black">{{label}}</v-btn>
+    <v-btn small dark :color="color">{{label}}</v-btn>
     <v-dialog
       v-model="dialog"
       max-width="290"
     >
+      <v-color-picker v-model="color"></v-color-picker>
       <v-card class="pa-5">
         <v-text-field v-model="label" outlined
+                      @keyup.enter="dialog = false"
                       hide-details="auto"
                       label="Digite a label do Botão"></v-text-field>
       </v-card>
@@ -25,6 +33,7 @@
   export default class Button extends Vue {
     dialog = false;
     label = 'Button';
+    color = 'gray';
     showEdit = false;
 
     mounted() {
