@@ -2,7 +2,7 @@
   <v-row no-gutters class="fill-height">
     <v-col class="ComponentDrawer pa-5" cols="4">
       <h1>Toolbox</h1>
-      <drag v-for="element in list1" :key="element.type" :data="element" class="mt-4">
+      <drag v-for="element in baseComponents" :key="element.type" :data="element" class="mt-4">
         <TextField v-if="element.type === 'TextField'"/>
         <CheckBox v-if="element.type === 'CheckBox'"/>
         <Button v-if="element.type === 'Button'"/>
@@ -15,7 +15,7 @@
           :grid=[20,20]
           :parent="true"
           class="list-group-item"
-          v-for="(element, index) in lists"
+          v-for="(element, index) in ComponentList"
           :key="index"
         >
           <v-btn @click="removeComponent(index)" text small> x</v-btn>
@@ -45,21 +45,23 @@
         }
     })
     export default class ComponentToolbox extends Vue {
-        list1 = [
+        baseComponents = [
             {type: "TextField", id: 1, label: "Label"},
             {type: "CheckBox", id: 2, itens: 3},
             {type: "Button", id: 3, label: "Button"}
         ]
-        selected = []
-        lists = Array();
+
+        get ComponentList() {
+            const components = this.$store.state.componentList; //this.todos;
+            return components;
+        }
 
         onDrop(event: any) {
-            this.lists.push(event.data);
-            console.log(this.lists)
+            this.$store.commit("addComponent", event.data)
         }
 
         removeComponent(index: any) {
-            this.lists.splice(index, 1)
+            this.$store.commit("removeComponent", index)
         }
     }
 </script>
