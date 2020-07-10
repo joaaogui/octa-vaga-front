@@ -1,5 +1,9 @@
 <template>
-  <v-btn small color="primary">Primary</v-btn></template>
+  <div>
+    <p>button</p>
+    <v-btn small dark color="black">OK</v-btn>
+  </div>
+</template>
 <script>
   import {Component, Vue} from "vue-property-decorator";
 

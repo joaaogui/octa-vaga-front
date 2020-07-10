@@ -1,17 +1,17 @@
 <template>
   <v-row no-gutters class="fill-height">
-    <v-col class="ComponentDrawer pa-5" cols="4">
-      <h1>Toolbox</h1>
-      <drag v-for="element in baseComponents" :key="element.type" :data="element" class="mt-4">
-        <TextField v-if="element.type === 'TextField'"/>
-        <CheckBox v-if="element.type === 'CheckBox'"/>
-        <Button v-if="element.type === 'Button'"/>
+    <v-col class="ComponentDrawer pa-8" cols="4">
+      <h2 class="display-1 font-weight-light mb-10 ">Component Toolbox</h2>
+      <drag v-for="component in baseComponents" :key="component.type" :data="component" class="mb-6 mt-6">
+        <TextField v-if="component.type === 'TextField'"/>
+        <v-divider class="mb-6"></v-divider>
+        <CheckBox v-if="component.type === 'CheckBox'"/>
+        <Button v-if="component.type === 'Button'"/>
       </drag>
     </v-col>
-    <v-col cols="8">
-      <drop @drop="onDrop" style="height:100%" three-line class="my-list">
+    <v-col cols="8" class="pa-5">
+      <drop @drop="onDrop" style="height:100%" class="my-list">
         <vue-draggable-resizable
-          style="text-align: right"
           :grid=[20,20]
           :parent="true"
           class="list-group-item"
@@ -52,7 +52,7 @@
         ]
 
         get ComponentList() {
-            const components = this.$store.state.componentList; //this.todos;
+            const components = this.$store.state.componentList;
             return components;
         }
 
@@ -73,6 +73,6 @@
   }
 
   .ComponentDrawer {
-    background: grey;
+    background: #ededed;
   }
 </style>

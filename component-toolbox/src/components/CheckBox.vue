@@ -1,7 +1,8 @@
 <template>
-  <v-card>
-    <v-checkbox v-model="selected" label="John" value="John"></v-checkbox>
-    <v-checkbox v-model="selected" label="Jacob" value="Jacob"></v-checkbox>
+  <v-card class="pa-4">
+    <p>checkbox</p>
+    <v-checkbox v-model="selected" label="John" value="John" hide-details="auto"></v-checkbox>
+    <v-checkbox v-model="selected" label="Jacob" value="Jacob" hide-details="auto"></v-checkbox>
   </v-card>
 </template>
 
