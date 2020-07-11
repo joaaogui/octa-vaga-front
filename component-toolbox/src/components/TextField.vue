@@ -2,13 +2,7 @@
   <div class="pr-1 pl-1 pb-2" :class="showEdit ? 'activeComponent' : ''">
     <div style="text-align: right">
       <slot></slot>
-      <v-tooltip v-if="showEdit" right>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon v-bind="attrs"
-                  v-on="on" small @click.stop="dialog = true">mdi-pencil</v-icon>
-        </template>
-        <span>Edit</span>
-      </v-tooltip>
+      <EditIcon v-if="showEdit" v-on:edit="dialog = true"/>
     </div>
 
     <v-text-field outlined :value="placeholder" style="cursor: pointer"
@@ -37,8 +31,10 @@
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
-
-    @Component
+    import EditIcon from "@/components/EditIcon.vue";
+    @Component({
+        components: {EditIcon}
+    })
     export default class TextField extends Vue {
         showEdit = false
         dialog = false

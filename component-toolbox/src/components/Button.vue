@@ -3,13 +3,7 @@
     <div class="mb-1" v-if="!showEdit">button</div>
     <div style="text-align: right">
       <slot></slot>
-      <v-tooltip v-if="showEdit" right>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon v-bind="attrs"
-                  v-on="on" small @click.stop="dialog = true">mdi-pencil</v-icon>
-        </template>
-        <span>Edit</span>
-      </v-tooltip>
+      <EditIcon v-if="showEdit" v-on:edit="dialog = true"/>
     </div>
     <v-btn small dark :color="color">{{label}}</v-btn>
     <v-dialog
@@ -28,8 +22,10 @@
 </template>
 <script lang="ts">
   import {Component, Vue} from "vue-property-decorator";
-
-  @Component
+  import EditIcon from "@/components/EditIcon.vue";
+  @Component({
+      components: {EditIcon}
+  })
   export default class Button extends Vue {
     dialog = false;
     label = 'Button';

@@ -6,14 +6,7 @@
       </v-col>
       <v-col cols="6" class="text-right">
         <slot></slot>
-        <v-tooltip v-if="showEdit" right>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon v-bind="attrs"
-                    v-on="on" small @click.stop="dialog = true">mdi-pencil
-            </v-icon>
-          </template>
-          <span>Edit</span>
-        </v-tooltip>
+        <EditIcon v-if="showEdit" v-on:edit="dialog = true"/>
       </v-col>
     </v-row>
 
@@ -21,7 +14,7 @@
                 :value="option"
                 hide-details="auto"
                 readonly/>
-    <div v-if="showEdit" class="mt-1 addText" @click="addOption"><u>adicionar</u></div>
+    <div v-if="showEdit" class="mt-1 addText" @click="addOption"><u>add</u></div>
     <v-dialog
       v-model="dialog"
       max-width="290"
@@ -38,8 +31,11 @@
 
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
+    import EditIcon from "@/components/EditIcon.vue";
 
-    @Component({    })
+    @Component({
+        components: {EditIcon}
+    })
     export default class CheckBox extends Vue {
         optionList = ["Option 1", "Option 2",]
         selected = [];
