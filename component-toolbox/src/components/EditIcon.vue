@@ -2,7 +2,7 @@
   <v-tooltip right>
     <template v-slot:activator="{ on, attrs }">
       <v-icon v-bind="attrs"
-              v-on="on" small @click.stop="bora">mdi-pencil</v-icon>
+              v-on="on" small @click.stop="edit">mdi-pencil</v-icon>
     </template>
     <span>Edit</span>
   </v-tooltip>
@@ -11,7 +11,7 @@
     import {Component, Vue} from "vue-property-decorator";
     @Component
     export default class EditIcon extends Vue {
-        bora(event: any){
+        edit(event: any){
             console.log(this.$parent)
             if (this.$parent.$el) {
                 if (this.$parent.$el.id === 'button') {

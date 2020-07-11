@@ -30,7 +30,7 @@
         <v-text-field v-model="title" outlined
                       @keyup.enter="dialog = false"
                       hide-details="auto"
-                      label="Digite a título do checkbox"></v-text-field>
+                      label="Enter the title of the checkbox"></v-text-field>
       </v-card>
     </v-dialog>
   </div>
@@ -39,16 +39,16 @@
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
 
-    @Component
+    @Component({    })
     export default class CheckBox extends Vue {
-        optionList = ["opção 1", "opção 2",]
+        optionList = ["Option 1", "Option 2",]
         selected = [];
         title = 'checkbox'
         showEdit = false;
         dialog = false;
 
         addOption() {
-            this.optionList.push("opção " + (this.optionList.length + 1))
+            this.optionList.push("Option " + (this.optionList.length + 1))
         }
 
         mounted() {

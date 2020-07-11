@@ -15,10 +15,6 @@ export const mutations = {
     removeComponent: (state: any, id: number) => {
         state.activeComponents = state.activeComponents.filter((item: { i: number }) => item.i !== id)
     },
-    editComponent: (state: any, {element, index}: any) => {
-        let existingComponent = state.activeComponents[index]
-        existingComponent = element
-    }
 }
 
 export default new Vuex.Store({

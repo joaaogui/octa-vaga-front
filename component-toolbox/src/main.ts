@@ -4,12 +4,6 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify';
-// @ts-ignore
-import VueDraggableResizable from 'vue-draggable-resizable';
-
-import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
-
-Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 Vue.config.productionTip = false
 
