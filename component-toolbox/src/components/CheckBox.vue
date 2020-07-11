@@ -1,5 +1,5 @@
 <template>
-  <div class="pr-1 pl-3" :class="showEdit ? 'activeComponent' : ''">
+  <div class="pr-1 pl-3" :class="showEdit && !borders ? 'activeComponent' : ''">
     <v-row class="text-left mt-1" no-gutters>
       <v-col cols="6">
         <div>{{title}}</div>
@@ -42,7 +42,9 @@
         title = 'checkbox'
         showEdit = false;
         dialog = false;
-
+        get borders() {
+            return this.$store.state.borders;
+        }
         addOption() {
             this.optionList.push("Option " + (this.optionList.length + 1))
         }

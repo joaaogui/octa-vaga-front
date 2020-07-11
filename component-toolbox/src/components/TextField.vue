@@ -1,5 +1,5 @@
 <template>
-  <div class="pr-1 pl-1 pb-2" :class="showEdit ? 'activeComponent' : ''">
+  <div class="pr-1 pl-1 pb-2" :class="showEdit && !borders ? 'activeComponent' : ''">
     <div style="text-align: right">
       <slot></slot>
       <EditIcon v-if="showEdit" v-on:edit="dialog = true"/>
@@ -41,6 +41,9 @@
         label = 'input text'
         placeholder = 'placeholder'
 
+        get borders() {
+            return this.$store.state.borders;
+        }
         mounted() {
             if (this.$parent.$el) {
                 if (this.$parent.$el.id === 'drop') {

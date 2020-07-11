@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export const state = {
     activeComponents: Array(),
+    borders: false
 }
 
 export const mutations = {
@@ -15,6 +16,9 @@ export const mutations = {
     removeComponent: (state: any, id: number) => {
         state.activeComponents = state.activeComponents.filter((item: { i: number }) => item.i !== id)
     },
+    toggleborders: (state: any) => {
+        state.borders = !state.borders
+    }
 }
 
 export default new Vuex.Store({

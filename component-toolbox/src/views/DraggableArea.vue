@@ -1,7 +1,8 @@
 <template>
   <div>
     <h2 class="display-1 font-weight-light mb-5 ">Component Toolbox</h2>
-    <h4 class="subtitle-1 font-weight-light mb-10 ">Drag and drop the components below into the dashed workarea</h4>
+    <h4 class="subtitle-1 font-weight-light mb-5 ">Drag and drop the components below into the dashed workarea</h4>
+    <h4 class="subtitle-2 font-weight-light mb-10 "><b>Hint: </b> You can resize the component on it's lower right corner</h4>
     <drag id="drag" v-for="component in baseComponents" :key="component.type" :data="component" class="mb-6 mt-6">
       <v-divider class="mb-6"></v-divider>
       <TextField v-if="component.type === 'TextField'"/>
