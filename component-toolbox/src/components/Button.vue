@@ -14,6 +14,8 @@
       <v-card class="pa-5">
         <v-text-field v-model="label" outlined
                       @keyup.enter="dialog = false"
+                      counter
+                      maxlength="20"
                       hide-details="auto"
                       label="Enter the button label"></v-text-field>
       </v-card>

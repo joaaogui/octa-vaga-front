@@ -16,13 +16,17 @@
       <v-card class="pa-5">
         <v-text-field v-model="label" outlined
                       @keyup.enter="dialog = false"
+                      counter
+                      maxlength="20"
                       hide-details="auto"
-                      label="Digite a label do text field"></v-text-field>
+                      label="Enter the text field label"></v-text-field>
       </v-card>
       <v-card class="pa-5">
         <v-text-field v-model="placeholder" outlined
                       @keyup.enter="dialog = false"
                       hide-details="auto"
+                      counter
+                      maxlength="20"
                       label="Digite o texto do placeholder"></v-text-field>
       </v-card>
     </v-dialog>
@@ -32,6 +36,7 @@
 <script lang="ts">
     import {Component, Vue} from "vue-property-decorator";
     import EditIcon from "@/components/EditIcon.vue";
+
     @Component({
         components: {EditIcon}
     })
@@ -44,6 +49,7 @@
         get borders() {
             return this.$store.state.borders;
         }
+
         mounted() {
             if (this.$parent.$el) {
                 if (this.$parent.$el.id === 'drop') {

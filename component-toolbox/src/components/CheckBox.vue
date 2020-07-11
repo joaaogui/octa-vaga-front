@@ -23,6 +23,8 @@
         <v-text-field v-model="title" outlined
                       @keyup.enter="dialog = false"
                       hide-details="auto"
+                      counter
+                      maxlength="20"
                       label="Enter the title of the checkbox"></v-text-field>
       </v-card>
     </v-dialog>
