@@ -3,13 +3,13 @@
     <v-col v-if='!borders' class="draggableCol pa-8" cols="12" xs="12" sm="5" md="4" lg="3">
       <DraggableArea/>
     </v-col>
-    <v-col cols="12" xs="12" class="droppableCol" sm="7" :md="!borders ? 8 : 12" :lg="!borders ? 9 : 12">
+    <v-col cols="12" xs="12" class="droppableCol" :sm="!borders ? 7 : 12" :md="!borders ? 8 : 12" :lg="!borders ? 9 : 12">
       <v-row no-gutters class="text-right">
         <v-col cols="12">
           <v-tooltip left>
           <template v-slot:activator="{ on, attrs }">
               <v-icon v-bind="attrs"
-                      v-on="on" :color="!borders ? 'blue' : 'pink'" class="mr-1 mt-1" @click="toggleNoBorder"> mdi-eye</v-icon>
+                      v-on="on" :color="borders ? '#c76d6d' : ''" class="mr-1 mt-1" @click="toggleNoBorder"> mdi-eye</v-icon>
             </template>
             <span v-if="borders">With Borders Visualization</span>
             <span v-else>No Borders Visualization</span>

@@ -109,7 +109,7 @@
   }
 
   .droppableArea.drop-allowed {
-    border: 2px black dotted;
+    border: 3px #c76d6d dotted;
   }
 
   .bordersArea {
