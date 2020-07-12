@@ -2,6 +2,7 @@
   <v-tooltip left>
     <template v-slot:activator="{ on, attrs }">
       <v-icon v-bind="attrs"
+              @click.stop="$emit('delete')"
               v-on="on" small>mdi-delete</v-icon>
     </template>
     <span>Delete</span>

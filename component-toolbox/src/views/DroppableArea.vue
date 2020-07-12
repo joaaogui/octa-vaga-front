@@ -20,34 +20,13 @@
                  :key="item.i">
 
         <TextField v-if="item.type === 'TextField'">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon v-bind="attrs"
-                      v-on="on" small @click="removeComponent(item.i)">mdi-delete
-              </v-icon>
-            </template>
-            <span>Delete</span>
-          </v-tooltip>
+          <DeleteIcon v-on:delete="removeComponent(item.i)"/>
         </TextField>
         <CheckBox v-if="item.type === 'CheckBox'">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon v-bind="attrs"
-                      v-on="on" small @click="removeComponent(item.i)">mdi-delete
-              </v-icon>
-            </template>
-            <span>Delete</span>
-          </v-tooltip>
+          <DeleteIcon v-on:delete="removeComponent(item.i)"/>
         </CheckBox>
         <Button v-if="item.type === 'Button'">
-          <v-tooltip left>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon v-bind="attrs"
-                      v-on="on" small @click="removeComponent(item.i)">mdi-delete
-              </v-icon>
-            </template>
-            <span>Delete</span>
-          </v-tooltip>
+          <DeleteIcon v-on:delete="removeComponent(item.i)"/>
         </Button>
       </grid-item>
     </grid-layout>
@@ -62,10 +41,12 @@
     import {Drop} from "vue-easy-dnd";
     // @ts-ignore
     import VueGridLayout from 'vue-grid-layout';
+    import DeleteIcon from "@/components/DeleteIcon.vue";
 
 
     @Component({
         components: {
+            DeleteIcon,
             Drop,
             TextField,
             CheckBox,
